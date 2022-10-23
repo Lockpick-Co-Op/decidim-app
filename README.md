@@ -40,12 +40,12 @@ You're good to go!
 1. Enable Review Apps for this app (you'll need to create a Pipeline)
 
 
-### Work Notes
+## Work Notes
 
 Important Note: Organization admins can't do anything until they've accepted the admin terms, you'll get "you don't have permissions" errors on every action other than logging in until you click that.
 
 
-#### Rails Console Commands
+### Rails Console Commands
 
 To get the Rails console in heroku, go to the "more" menu in the top right of the app dashboard and run `bundle exec rails console`
 
