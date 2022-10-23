@@ -38,3 +38,50 @@ You're good to go!
 1. Fill in the required env vars.
 1. Create the app
 1. Enable Review Apps for this app (you'll need to create a Pipeline)
+
+
+### Work Notes
+
+Important Note: Organization admins can't do anything until they've accepted the admin terms, you'll get "you don't have permissions" errors on every action other than logging in until you click that.
+
+
+#### Rails Console Commands
+
+To get the Rails console in heroku, go to the "more" menu in the top right of the app dashboard and run `bundle exec rails console`
+
+This is particularly useful for setting up org admins. Once you have a working org admin (and have accepted the terms) you can manage
+regular users within the application itself
+
+Get the object representing organizations:
+
+```Ruby
+orgs = Decidim::Organization
+# To get only the first (by ID) org, use `Decidim::Organization.first`
+```
+
+Create a user (WIP):
+
+```Ruby
+# admin value defines whether user is admin of an org. System admins are created with Decidim::System as shown above
+u = Decidim::User.new(admin: true)
+# Produces the following object:
+#<Decidim::User id: nil, email: "", created_at: nil, updated_at: nil, decidim_organization_id: nil, name: nil, locale: nil, avatar: nil, delete_reason: nil, deleted_at: nil, admin: false, managed: false, roles: [], email_on_notification: false, nickname: "", personal_url: nil, about: nil, accepted_tos_version: nil, officialized_at: nil, officialized_as: nil, newsletter_token: "", newsletter_notifications_at: nil, extended_data: {}, following_count: 0, followers_count: 0, notification_types: "all", admin_terms_accepted_at: nil, session_token: nil, direct_message_types: "all">
+
+```
+
+Modify the admin user of the first organization: (helpful if SMTP is not configured, to activate an org admin user)
+
+```Ruby
+u = Decidim::User.first
+#set user properties, eg:... 
+# ...password
+u.password = <password string literal>
+u.password_confirmation = <same password string literal>
+# ...skip email-based confirmation
+u.skip_confirmation!
+
+#when done, save the user object to the DB and you're good to go
+u.save!
+```
+
+
