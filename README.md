@@ -65,6 +65,7 @@ Get the object representing organizations:
 
 ```Ruby
 orgs = Decidim::Organization
+organization.host = <for example, the URL of the Heroku instance without https://>
 # To get only the first (by ID) org, use `Decidim::Organization.first`
 ```
 
@@ -88,6 +89,7 @@ u.password = <password string literal>
 u.password_confirmation = <same password string literal>
 # ...skip email-based confirmation
 u.skip_confirmation!
+u.tos_agreement = true
 
 #when done, save the user object to the DB and you're good to go
 u.save!
