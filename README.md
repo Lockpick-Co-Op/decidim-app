@@ -44,6 +44,15 @@ You're good to go!
 
 Important Note: Organization admins can't do anything until they've accepted the admin terms, you'll get "you don't have permissions" errors on every action other than logging in until you click that.
 
+### Domains
+
+Organizations each need their own hostname, which means a domain or subdomain (maybe a subdirectory, but haven't tried that yet).
+
+In Heroku, there is a setting for custom domains, which can be added to an application. Adding that, and setting a CNAME DNS record
+so a particular domain routes to the Decidim app, is sufficient to see an org with that [sub]domain set as its hostname to be visible.
+
+One example of this is the subodmain [phila-decidim-demo.davidginzberg.com](https://www.whatsmydns.net/#CNAME/phila-decidim-demo.davidginzberg.com) which is configured to point to a Decidim instance called [`decidim-poc-lpc`](https://phila-decidim-demo.davidginzberg.com) on Heroku. Changing your local hosts file to route to the appropriate application may also work.
+
 
 ### Rails Console Commands
 
